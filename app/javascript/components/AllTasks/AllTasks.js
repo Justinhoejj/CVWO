@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import TaskCard from './TaskCard'
+import NewTask from './NewTask'
 import styled from 'styled-components'
 
 const Home = styled.div `
@@ -34,6 +35,7 @@ export default function AllTasks() {
 
     }, [tasks.length])
 
+
     const list = tasks.map( item=>{
         return(
         <TaskCard 
@@ -50,6 +52,7 @@ export default function AllTasks() {
         <Header>
             <h1>You have {tasks.length} tasks due for completion</h1>
         </Header>
+        <NewTask/>
         <Card>
         <ul>{list}</ul>
         </Card>
