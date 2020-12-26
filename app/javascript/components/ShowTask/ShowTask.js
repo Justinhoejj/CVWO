@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Card from './Card'
-import UpdateField from './UpdateField'
+import Card from './View/Card'
+import UpdateField from './Forms/UpdateField'
 import styled from 'styled-components'
-import TagField from './TagField'
+import TagField from './Forms/TagField'
+import SubtaskField from './Forms/SubtaskField'
 
 const Wrapper = styled.div `
     display: grid;
@@ -18,7 +19,7 @@ const Column = styled.div `
     overflow: scroll;
 
     &:last-child{
-        background: #000;
+        background: #888;
     }
 `
 const Main = styled.div`
@@ -31,9 +32,19 @@ export default function ShowTask(props) {
     const [tags, setTags] = useState([])
     const [loaded, setLoaded] = useState(false)//to prevent preemptive return data calls
     const [newTask, setNewTask] = useState({})
+    const [tagsIndex, setTagsIndex] = useState([])
 
     const id = props.match.params.id
     const url = `/api/v1/tasks/${id}`
+
+    useEffect(()=>{
+        axios.get(`/api/v1/tags`)
+        .then(resp=>{
+            setTagsIndex(resp.data.data)
+        })
+        .catch(resp=>console.log(resp))
+    },[loaded])
+
     useEffect(()=>{
         axios.get(url)
         .then(resp=> {
@@ -68,6 +79,7 @@ export default function ShowTask(props) {
                 <Card
                     attributes = {task.data}
                     relations = {task.relations}
+                    taggings = {task.taggings}
                 />
             </Main>
         </Column>    
@@ -76,10 +88,13 @@ export default function ShowTask(props) {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 attributes={task.data}
-
             />
-            <TagField/>
-            <div>Future subtask</div>
+            <SubtaskField/>
+            <TagField
+                tagsIndex={tagsIndex}
+                task = {task}
+                setLoaded={setLoaded}
+            />
         </Column>
         </>
     }

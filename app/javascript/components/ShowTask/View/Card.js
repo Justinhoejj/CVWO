@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
+import Tag from './Tag'
 
 const Wrapper = styled.div`
     padding: 50px 100px 50px 0; 
@@ -12,10 +13,14 @@ const Wrapper = styled.div`
 export default function Card(props) {
     const {title, body, done, due, id} = props.attributes
     const tags = props.relations//destructure the relations components
-    
+
     const list = tags.map(item=>{
        return( 
-       <ul key={item.id}>{item.name}</ul>
+       <Tag 
+       key={item.id}
+       tag={item}
+       taggings={props.taggings}
+       />
        )
     })
     
@@ -32,7 +37,7 @@ export default function Card(props) {
         <p>{body}</p>
         <p>{due}</p>
         {list}
-        <p>Sub tasks and tags goes here</p>
+        <p>Sub tasks goes here</p>
         <Link to={``}>
         <button onClick={handleDelete}>Delete</button>
         </Link>

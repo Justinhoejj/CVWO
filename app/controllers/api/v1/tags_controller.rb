@@ -10,7 +10,8 @@ module Api
             def show #good
                 tag = Tag.find(params[:id])
                 tasks =tag.tasks
-                render json: {status: 'SUCCESS', message:'Loaded tag', data:tag, relations:tasks},status: :ok
+                taggings=tag.taggings
+                render json: {status: 'SUCCESS', message:'Loaded tag', data:tag, relations:tasks, taggings:taggings},status: :ok
             end
 
             def create #good
