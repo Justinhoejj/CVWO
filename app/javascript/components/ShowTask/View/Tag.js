@@ -3,18 +3,20 @@ import React from 'react'
 import axios from 'axios'
 
 export default function Tag(props){
+    const tagname = props.data[1]
+    const taggingid = props.data[0]
     
-    //const tagNames
-    const getTagName = ()=>{
-
-    }
     const handleUntag = (e)=>{
-        
+        axios.delete(`/api/v1/taggings/${taggingid}`)
+        .then(resp=>{
+            props.setLoaded(false)
+        })
+        .catch(resp=>console.log(resp))
     }
     
     return(
         <div>
-        {props.tag.name} <button onClick={getTagName}>Remove</button>
+        {tagname}<button onClick={handleUntag}>Remove</button>
         </div>
     )
 }

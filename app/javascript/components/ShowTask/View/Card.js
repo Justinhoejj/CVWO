@@ -12,31 +12,34 @@ const Wrapper = styled.div`
 
 export default function Card(props) {
     const {title, body, done, due, id} = props.attributes
-    const tags = props.relations//destructure the relations components
-
-    const list = tags.map(item=>{
-       return( 
-       <Tag 
-       key={item.id}
-       tag={item}
-       taggings={props.taggings}
-       />
-       )
+    const taggingids = props.taggings.map(item=>{return item.id})
+    const tagnames = props.relations.map(item=>{return item.name})
+    const zipped = taggingids.map(function(e, i){
+        return[e, tagnames[i]]
     })
-    
+    const tag = zipped.map((item)=>{
+        return (<Tag
+        key = {item[0]}
+        data ={item}
+        setLoaded={props.setLoaded}
+        />)
+    })
+
     const handleDelete = () => {
         const url =`/api/v1/tasks/${id}`
         axios.delete(url)
         .then(resp=>console.log(resp))
         .catch(resp=>console.log(resp))
     }
+
+
     
     return( 
     <Wrapper>
         <h1>{title}</h1>
         <p>{body}</p>
         <p>{due}</p>
-        {list}
+        {tag}
         <p>Sub tasks goes here</p>
         <Link to={``}>
         <button onClick={handleDelete}>Delete</button>

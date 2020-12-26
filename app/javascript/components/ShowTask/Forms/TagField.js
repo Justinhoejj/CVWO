@@ -25,7 +25,9 @@ export default function TagField(props){
     const handleCreate = (e)=>{
         e.preventDefault()
         axios.post(`/api/v1/tags`, tagName)
-        .then(resp=>console.log(resp))
+        .then(resp=>{
+            props.setLoaded(false)
+        })
         .catch(resp=>console.log(resp))
 
     }

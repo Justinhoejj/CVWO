@@ -2,6 +2,12 @@ module Api
     module V1
         class TaggingsController < ApplicationController
             skip_before_action :verify_authenticity_token #for access through postman extension
+            
+            def show
+                tagging = Tagging.find(params[:id])
+                tag = tagging.tag
+                render json: {status: 'SUCCESS', message:'Loaded tagging', data:tagging, tag:tag},status: :ok
+            end
 
             def create #good
                 tagging = Tagging.new(tagging_params)

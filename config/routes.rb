@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       namespace :v1 do
         resources :tasks
         resources :tags
-        resources :taggings, only: [:create, :destroy]
+        resources :taggings, only: [:create, :destroy, :show]
       end
     end
   get '*path', to: 'pages#index', via: :all #redirects invalid page request to root for react-router compatability

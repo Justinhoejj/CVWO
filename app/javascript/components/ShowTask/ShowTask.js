@@ -80,6 +80,7 @@ export default function ShowTask(props) {
                     attributes = {task.data}
                     relations = {task.relations}
                     taggings = {task.taggings}
+                    setLoaded= {setLoaded}
                 />
             </Main>
         </Column>    
