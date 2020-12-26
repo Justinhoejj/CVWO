@@ -11,7 +11,7 @@ const Home = styled.div `
     margin-right: auto;
 `
 const Header = styled.div `
-    padding: 100px 100px 10px 100px;
+    padding: 50px 100px 10px 100px;
     
     h1 {
         font-size: 42px;
