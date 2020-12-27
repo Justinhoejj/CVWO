@@ -23,6 +23,13 @@ const Card = styled.div`
 `
 export default function AllTasks() {
     const [tasks, setTasks] = useState([])
+    const [complete, setComplete] = useState(false)
+    const [loaded, setLoaded] =useState(true)
+
+    const handleComplete = () => {
+        setComplete(!complete)
+    }
+
 
     useEffect(()=>{
         //get all tasks from api
@@ -30,17 +37,21 @@ export default function AllTasks() {
         axios.get('api/v1/tasks.json')
         .then( resp => {
             setTasks(resp.data.data)
+            setLoaded(true)
         })
         .catch( resp=>console.log(resp))
 
-    }, [tasks.length])
+    }, [loaded])
 
 
-    const list = tasks.map( item=>{
+    const filtered = tasks.filter(item=> item.done === complete) //fillters all undone tasks
+
+    const list = filtered.map( item=>{
         return(
         <TaskCard 
             key={item.id}
             data={item}
+            setLoaded={setLoaded}
             />
 
 
@@ -50,9 +61,12 @@ export default function AllTasks() {
     return (
     <Home>
         <Header>
-            <h1>You have {tasks.length} tasks due for completion</h1>
+            <h1>You have {filtered.length} tasks due for completion</h1>
         </Header>
-        <NewTask/>
+        <NewTask
+            setLoaded={setLoaded}
+        />
+        <button onClick={handleComplete}>{(()=>{return complete?"Review Completed":"View Incomplete"})()}</button>
         <Card>
         <ul>{list}</ul>
         </Card>

@@ -11,7 +11,8 @@ module Api
                 task = Task.find(params[:id])
                 tags = task.tags
                 taggings = task.taggings
-                render json: {status: 'SUCCESS', message:'Loaded task', data:task, relations:tags, taggings:taggings},status: :ok
+                subtasks=task.subtasks
+                render json: {status: 'SUCCESS', message:'Loaded task', data:task, relations:tags, taggings:taggings, subtasks:subtasks},status: :ok
             end
 
             def create #good

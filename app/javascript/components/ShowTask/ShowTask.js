@@ -80,6 +80,7 @@ export default function ShowTask(props) {
                     attributes = {task.data}
                     relations = {task.relations}
                     taggings = {task.taggings}
+                    subtasks = {task.subtasks}
                     setLoaded= {setLoaded}
                 />
             </Main>
@@ -90,7 +91,9 @@ export default function ShowTask(props) {
                 handleSubmit={handleSubmit}
                 attributes={task.data}
             />
-            <SubtaskField/>
+            <SubtaskField
+                taskid={task.data.id}
+            />
             <TagField
                 tagsIndex={tagsIndex}
                 task = {task}

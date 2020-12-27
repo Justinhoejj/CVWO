@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import Tag from './Tag'
+import SubtaskCard from './SubtaskCard'
 
 const Wrapper = styled.div`
     padding: 50px 100px 50px 0; 
@@ -14,6 +15,7 @@ export default function Card(props) {
     const {title, body, done, due, id} = props.attributes
     const taggingids = props.taggings.map(item=>{return item.id})
     const tagnames = props.relations.map(item=>{return item.name})
+    
     const zipped = taggingids.map(function(e, i){
         return[e, tagnames[i]]
     })
@@ -24,6 +26,16 @@ export default function Card(props) {
         setLoaded={props.setLoaded}
         />)
     })
+    
+
+    const subtasks = props.subtasks.map( item => {
+        return (<SubtaskCard 
+            key = {item.id}
+            attributes={item}
+            taskid={id}
+            />
+            )
+        })
 
     const handleDelete = () => {
         const url =`/api/v1/tasks/${id}`
@@ -31,8 +43,6 @@ export default function Card(props) {
         .then(resp=>console.log(resp))
         .catch(resp=>console.log(resp))
     }
-
-
     
     return( 
     <Wrapper>
@@ -40,7 +50,7 @@ export default function Card(props) {
         <p>{body}</p>
         <p>{due}</p>
         {tag}
-        <p>Sub tasks goes here</p>
+        {subtasks}
         <Link to={``}>
         <button onClick={handleDelete}>Delete</button>
         </Link>

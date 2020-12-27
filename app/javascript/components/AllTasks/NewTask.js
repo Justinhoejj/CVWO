@@ -13,7 +13,10 @@ export default function NewTask(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('/api/v1/tasks', task)
-        .then(resp =>{console.log(resp)})
+        .then(resp =>{
+            console.log(resp)
+            props.setLoaded(false)
+        })
         .catch(resp=>{console.log(resp)})
     }
     
