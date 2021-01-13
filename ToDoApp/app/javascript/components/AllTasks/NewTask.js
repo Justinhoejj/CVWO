@@ -1,5 +1,21 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+
+`
+
+const Form = styled.form`
+    display: inline-box;
+`
+
+const Field =styled.div`
+    font-family: sans-serif;
+    font-size: 25px;
+    padding: 50px;
+`
+
 
 export default function NewTask(props) {
     const [task, setTask] = useState({})
@@ -21,19 +37,19 @@ export default function NewTask(props) {
     }
     
     return (
-        <div className="wrapper">
-            <form onSubmit={handleSubmit}>
-                <div className="field">
+        <Wrapper>
+            <Form onSubmit={handleSubmit}>
+                <Field>
                     <input onChange={handleChange} type="text" name="title"  placeholder="Task Title"/>
-                </div>
-                <div className="field">
+                </Field>
+                <Field>
                     <input onChange={handleChange} type="field" name="body" placeholder="Task Description"/>
-                </div>
-                <div className="field">
+                </Field>
+                <Field>
                     <input onChange={handleChange} type="field" name="due" placeholder="yyyy-mm-dd"/>
-                </div>
+                </Field>
                     <button type="submit">Add task</button>
-            </form>
-        </div>
+            </Form>
+        </Wrapper>
     )
 }

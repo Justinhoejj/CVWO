@@ -3,7 +3,7 @@ module Api
         class TasksController < ApplicationController
             skip_before_action :verify_authenticity_token #for access through postman extension
             def index #good
-                tasks = Task.all;
+                tasks = current_user.tasks
                 render json: {status: 'SUCCESS', message:'Loaded tasks', data:tasks},status: :ok
             end
 
@@ -12,11 +12,14 @@ module Api
                 tags = task.tags
                 taggings = task.taggings
                 subtasks=task.subtasks
+                if current_user.id == task.user_id
                 render json: {status: 'SUCCESS', message:'Loaded task', data:task, relations:tags, taggings:taggings, subtasks:subtasks},status: :ok
+                else
+                end
             end
 
             def create #good
-                task = Task.new(task_params)
+                task = current_user.tasks.build(task_params)
 
                 if task.save
                     render json: {status: 'SUCCESS', message:'Saved task', data:task},status: :ok 

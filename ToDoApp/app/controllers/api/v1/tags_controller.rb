@@ -3,7 +3,7 @@ module Api
         class TagsController < ApplicationController
             skip_before_action :verify_authenticity_token #for access through postman extension
             def index #good
-                tags = Tag.all;
+                tags = current_user.tags;
                 render json: {status: 'SUCCESS', message:'Loaded tags', data:tags},status: :ok
             end
 
@@ -15,7 +15,7 @@ module Api
             end
 
             def create #good
-                tag = Tag.new(tag_params)
+                tag = current_user.tags.build(tag_params)
 
                 if tag.save
                     render json: {status: 'SUCCESS', message:'Saved tag', data:tag},status: :ok 

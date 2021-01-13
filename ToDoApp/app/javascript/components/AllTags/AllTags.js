@@ -5,8 +5,24 @@ import styled from 'styled-components'
 
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    margin: 6rem;
+    flex-direction: row;
+    justify-content: space-between;
+    `
+const Tag = styled.div`
+    a{  
+        border-radius: 5px;
+        color: white;
+        font-family: "Hind", sans-serif;
+        display: inline-block;
+        padding: 0.5rem 0.5rem;
+        margin: o.5rem 1rem;
+        text-align: center;
+        background-color: grey;
+        text-decoration: none;
+        width: 100%;
+    }
 `
 
 export default function AllTags() {
@@ -18,23 +34,24 @@ export default function AllTags() {
         .catch(resp=>console.log(resp))
     },[])
     
-
-    const tagcards = tags.map(
+    const ordered = tags.sort((a,b)=> a.name.localeCompare(b.name))
+    const tagcards = ordered.map(
         item =>{
             return( 
-            <div key={item.id}>
+            < Tag key={item.id}>
                 <Link to={`/tags/${item.id}`}>
                     {item.name}
                 </Link>
-            </div>
+            </ Tag>
             )
         })
 
 
 
     return (
-        <Wrapper>
+        <div>
             {tagcards}
-        </Wrapper>
+    
+        </div>
     )
 }
