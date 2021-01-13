@@ -5,11 +5,15 @@ import ShowTask from './ShowTask/ShowTask'
 import AllTags from './AllTags/AllTags'
 import ShowTag from './ShowTag/ShowTag'
 import Header from './Layout/Header'
+import styled from 'styled-components'
 
+const Overlay = styled.div`
+    background-color: lightblue;
+`
 
 export default function App(){
     return (
-        <div>
+       <Overlay>
        <Header/>
        <Switch>
            <Route exact path ="/" component={AllTasks}/>
@@ -17,6 +21,6 @@ export default function App(){
            <Route exact path ="/tags" component ={AllTags}/>
            <Route exact path ="/tags/:id" component={ShowTag}/>
        </Switch>
-       </div>
+       </Overlay>
     )
 }

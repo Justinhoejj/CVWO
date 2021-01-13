@@ -3,10 +3,20 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+const currentDate = new Date();
 const Card = styled.div`
     border: 1px solid #efefef;
     background: #fff;
-    padding: 10px 50px
+    padding: 10px 50px;
+    display:flex;
+
+    button{
+      margin-right: 100px;
+    }
+`
+
+const Tasktitle=styled.div`
+    font-size: 30px;
 `
 export default function TaskCard (props) {
 
@@ -21,11 +31,10 @@ export default function TaskCard (props) {
 
     return(
         <Card>
-            <button onClick={handleComplete} className="checkbox">comlete</button>
           <Link to={`/tasks/${props.data.id}`}>
-            <div className="task-title">{props.data.title}</div>
-            <div className="sub-tasks">completion bar</div>
+            <Tasktitle>{props.data.title}</Tasktitle> <div className="sub-tasks">Due:{props.data.due}</div>
           </Link>
+          <button onClick={handleComplete} className="checkbox">comlete</button>
         </Card>
     )
 }

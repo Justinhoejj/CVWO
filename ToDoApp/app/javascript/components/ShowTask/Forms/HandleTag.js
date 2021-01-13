@@ -1,6 +1,11 @@
-import Axios from 'axios'
 import React from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
+const Button = styled.button`
+    font-size:12px;
+`
+
 
 export default function HandleTag(props) {
     const taggingData = {
@@ -17,8 +22,8 @@ export default function HandleTag(props) {
     }
     
     return (
-    <button onClick={handleTagging}>
+    <Button onClick={handleTagging}>
         {props.tag.name}
-    </button>
+    </Button>
     )
 }

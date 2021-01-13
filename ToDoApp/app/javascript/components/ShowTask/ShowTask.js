@@ -20,6 +20,7 @@ const Column = styled.div `
 
     &:last-child{
         background: #888;
+        text-align:center;
     }
 `
 const Main = styled.div`
