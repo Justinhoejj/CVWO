@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div `
-    padding: 100px 100px 50px 100px;
+    padding: 10px 10px 50px 10px;
     justify-content: space-between;
     display: flex;
+    background-color:black;
     
 
     a { 

@@ -1,6 +1,27 @@
-import Axios from 'axios'
 import React from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+    background-color: grey;
+    border-radius:5px;
+    margin-right:5px;
+    font-size: 18px;
+    padding: 0px 0px 0px 5px;
+    
+    button{
+        font-family: arial;
+        color:white;
+        background-color:grey;
+        border: 0px;
+        font-size: 15px;
+
+        &:hover{
+            font-size: 17px;
+            color: red;
+        }
+    }
+`
 
 export default function Tag(props){
     const tagname = props.data[1]
@@ -15,8 +36,8 @@ export default function Tag(props){
     }
     
     return(
-        <div>
-        {tagname}<button onClick={handleUntag}>Remove</button>
-        </div>
+        <Wrapper>
+        {tagname}<button onClick={handleUntag}>X</button>
+        </Wrapper>
     )
 }

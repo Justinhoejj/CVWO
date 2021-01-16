@@ -23,18 +23,19 @@ const Wrapper = styled.div`
         background-color:lightblue;
 
         &:hover{
-            border: 5px solid #609BC9; 
+            border: 5px solid #609BC9;
         }
     }
 
     button {
-        font-size:16px;
+        font-size:18px;
         background-color:lightblue;
         border-radius: 4px;
         border: 3px solid black;
         
         &:hover{
             border: 5px solid black; 
+            font-size: 20px;
         }
     }
 `

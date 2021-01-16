@@ -15,6 +15,11 @@ input {
     &:hover{
         border: 5px solid #609BC9; 
     }
+
+    &:last-child{
+        width:40px;
+    }
+    
     }
 
 button {
