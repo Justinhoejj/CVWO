@@ -12,6 +12,7 @@ const Wrapper = styled.div`
          padding: 10px;
          resize: horizontal;
          overflow:auto;
+         border: 1px solid black;
          a{ 
             background-color: grey;
             border-radius: 5px;
@@ -19,6 +20,11 @@ const Wrapper = styled.div`
             text-decoration: none;
             padding: 0.53em 1em;
             margin: 8px;
+            &:hover{
+                border: 3px solid black;
+                font-size: 16px;
+                color:black;
+            }
          }
     `
 

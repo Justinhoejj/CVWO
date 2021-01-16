@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     border-radius:5px;
     margin-right:5px;
     font-size: 18px;
+    border: 1px solid black;
     padding: 0px 0px 0px 5px;
     
     button{
