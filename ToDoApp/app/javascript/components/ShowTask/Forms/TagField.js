@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
     text-align: center; 
-    font-family: sans-serif;    
+    font-family: sans-serif;
+    font-size: 22px;    
     h1 {
         font-size: 30px;
         font-family: sans-serif;
@@ -13,16 +14,28 @@ const Wrapper = styled.div`
     }
 
     input {
-        font-size: 14px;
+        font-size: 18px;
         margin-left:10px;
         margin-right: none;
-        width: 70px;
+        width: 90px;
         border-radius: 3px;
+        border: 1px solid #609BC9;
         background-color:lightblue;
+
+        &:hover{
+            border: 5px solid #609BC9; 
+        }
     }
 
     button {
+        font-size:16px;
         background-color:lightblue;
+        border-radius: 4px;
+        border: 3px solid black;
+        
+        &:hover{
+            border: 5px solid black; 
+        }
     }
 `
 

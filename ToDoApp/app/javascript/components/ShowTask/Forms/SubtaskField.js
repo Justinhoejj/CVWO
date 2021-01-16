@@ -3,11 +3,16 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 const Form = styled.form`
+
+font-family: sans-serif;
+font-size: 24px;
+font-weight: bold;
+
 input {
     margin-left: 20px;
     resize: none;
     overflow: hidden;
-    min-height: 50px;
+    min-height: 30px;
     font-size: 24px;
     font-color: black;
     background-color: #AAE5F7;
@@ -23,6 +28,7 @@ button {
     &:hover{
         border: 5px solid black; 
     }
+    
 }
 `
 
@@ -43,7 +49,8 @@ export default function SubtaskField(props){
     
     return(
         <Form onSubmit={handleSubmit}>
-        <input onChange={handleChange} name="name" type="field" placeholder="Name of Subtask"/>
+            Breakdown Task:
+        <input onChange={handleChange} name="name" type="field" placeholder="Add subtask"/>
         <button type="submit">Add</button>
         </Form>
     )

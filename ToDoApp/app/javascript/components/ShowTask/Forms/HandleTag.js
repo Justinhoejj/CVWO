@@ -3,7 +3,12 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 const Button = styled.button`
-    font-size:12px;
+    font-size:18px;
+    border: 1px solid black;
+    border-radius: 3px;
+    &:hover{
+        border: 5px solid black; 
+    }
 `
 
 

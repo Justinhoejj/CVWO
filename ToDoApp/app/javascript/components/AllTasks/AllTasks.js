@@ -37,8 +37,7 @@ export default function AllTasks() {
     const [tasks, setTasks] = useState([])
     const [complete, setComplete] = useState(false)
     const [loaded, setLoaded] =useState(true)
-    const [subTasks, setSubtasks]=useState([])
-
+    
     const handleComplete = () => {
         setComplete(!complete)
     }
@@ -49,8 +48,6 @@ export default function AllTasks() {
         axios.get('api/v1/tasks.json')
         .then( resp => {
             setTasks(resp.data.data)
-            console.log(resp)
-            //setSubtasks(res)
             setLoaded(true)
         })
         .catch( resp=>console.log(resp))
