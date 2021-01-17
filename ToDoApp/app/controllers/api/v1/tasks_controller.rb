@@ -11,7 +11,7 @@ module Api
                 task = Task.find(params[:id])
                 tags = task.tags
                 taggings = task.taggings
-                subtasks=task.subtasks
+                subtasks= task.subtasks
                 if current_user.id == task.user_id
                 render json: {status: 'SUCCESS', message:'Loaded task', data:task, relations:tags, taggings:taggings, subtasks:subtasks},status: :ok
                 else

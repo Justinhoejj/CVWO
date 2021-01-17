@@ -6,10 +6,8 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
          display: flex;
-         flex-wrap: wrap;
          justify-content: center;
          align-itemms: space-between;
-         padding: 10px;
          resize: horizontal;
          overflow:auto;
          border: 1px solid black;

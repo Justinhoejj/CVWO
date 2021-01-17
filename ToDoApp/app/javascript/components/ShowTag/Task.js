@@ -40,15 +40,14 @@ const Words = styled.div`
       margin-left:60px;
       font-size:30px;
     }
+
 `
-
 const currentDate = new Date();
-
 
 export default function TaskCard (props) {
     
   const [subTasks, setSubTasks] = useState([]);
-  const undone = subTasks.filter(item=>!item.done)
+  const undone = subTasks.filter(item=>item.done)
   const total = subTasks.length
   
   const handleComplete = () => {
@@ -60,27 +59,26 @@ export default function TaskCard (props) {
       })
       .catch(resp=>console.log(resp))
     } else {
-      console.log(undone.length)
+      console.log("incomplete subtasks")
     }
   }
-
     useEffect(() => {
-      axios.get(`api/v1/tasks/${props.data.id}`)
+      axios.get(`/api/v1/tasks/${props.data.id}`)
       .then(resp => setSubTasks(resp.data.subtasks))
       .catch(resp => console.log(resp))
     },[])
 
 
     return(
-      <Card>
-        <Link to={`/tasks/${props.data.id}`}>
-          <h1>{props.data.title}</h1>
-        </Link>
-        <Words>
-        <p>Due:{props.data.due}</p>
-        <p>{undone.length}/{total} <br/></p>
-        <button onClick={handleComplete} className="checkbox">Comlete</button>
-        </Words>
-      </Card>
-  )
+        <Card>
+          <Link to={`/tasks/${props.data.id}`}>
+            <h1>{props.data.title}</h1>
+          </Link>
+          <Words>
+          <p>Due:{props.data.due}</p>
+          <p>{undone.length}/{total} <br/></p>
+          <button onClick={handleComplete} className="checkbox">Comlete</button>
+          </Words>
+        </Card>
+    )
 }
