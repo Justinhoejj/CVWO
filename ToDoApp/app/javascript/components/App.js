@@ -4,7 +4,6 @@ import AllTasks from './AllTasks/AllTasks'
 import ShowTask from './ShowTask/ShowTask'
 import AllTags from './AllTags/AllTags'
 import ShowTag from './ShowTag/ShowTag'
-import Header from './Layout/Header'
 import styled from 'styled-components'
 
 const Overlay = styled.div`
@@ -14,7 +13,6 @@ const Overlay = styled.div`
 export default function App(){
     return (
        <Overlay>
-       <Header/>
        <Switch>
            <Route exact path ="/" component={AllTasks}/>
            <Route exact path ="/tasks/:id" component={ShowTask}/>

@@ -30,7 +30,6 @@ const Main = styled.div`
 
 export default function ShowTask(props) {
     const [task, setTask] = useState({})
-    const [subtasks, setSubtasks] = useState([])// for future use
     const [tags, setTags] = useState([])
     const [loaded, setLoaded] = useState(false)//to prevent preemptive return data calls
     const [newTask, setNewTask] = useState({})

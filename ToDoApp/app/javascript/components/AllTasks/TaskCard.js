@@ -20,7 +20,7 @@ const Card = styled.div`
 
     button{
       background: lightblue;
-      margin-top: 20px;
+      margin-top: 30px;
       margin-right: 50px;
       border-radius: 3px;
       font-size:15px;
@@ -79,7 +79,7 @@ export default function TaskCard (props) {
         <Words>
         <p>Due:{props.data.due}</p>
         <p>{undone.length}/{total} <br/></p>
-        <button onClick={handleComplete} className="checkbox">Comlete</button>
+        <button onClick={handleComplete} className="checkbox">Complete</button>
         </Words>
       </Card>
   )

@@ -77,7 +77,7 @@ export default function TaskCard (props) {
           <Words>
           <p>Due:{props.data.due}</p>
           <p>{undone.length}/{total} <br/></p>
-          <button onClick={handleComplete} className="checkbox">Comlete</button>
+          <button onClick={handleComplete} className="checkbox">Complete</button>
           </Words>
         </Card>
     )

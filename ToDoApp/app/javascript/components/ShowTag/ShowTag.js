@@ -20,9 +20,11 @@ const Wrapper = styled.div`
             color: red;
         }
     }
+    
     h1 {
         margin-left: 40px;
     }
+
     a {
         margin-left: 40px; 
         text-decoration:none;
@@ -66,7 +68,7 @@ export default function ShowTag(props){
         <Wrapper>
         <h1>You have {tasks.length} tasks under {tagname} </h1>
         <Link to={``}>
-            <button onClick={handleDelete}>Remove {tagname}</button> from all tasks
+            <button onClick={handleDelete}>Remove </button> {tagname} tag from all tasks
         </Link>
         <ul>
             {list}
