@@ -3,10 +3,17 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const Card = styled.div`
-    border: 1px solid black;
+
+export default function TaskCard (props) {
+  const [subTasks, setSubTasks] = useState([]);
+  const undone = subTasks.filter(item=>!item.done)
+  const total = subTasks.length
+  
+  const Card = styled.div`
+    border: 2px solid ${undone == 0 ? "darkgreen" : "red"};
     margin-bottom: 1px;
     background-color: lightgrey;
+    margin-right: 30px;
     color:black;
     padding: 0px 20px;
     display:flex;
@@ -19,7 +26,7 @@ const Card = styled.div`
     }
 
     button{
-      background: lightblue;
+      background: ${props.data.done? "grey" : "lightblue" };
       margin-top: 30px;
       margin-right: 50px;
       border-radius: 3px;
@@ -41,16 +48,7 @@ const Words = styled.div`
       font-size:30px;
     }
 `
-
-const currentDate = new Date();
-
-
-export default function TaskCard (props) {
-    
-  const [subTasks, setSubTasks] = useState([]);
-  const undone = subTasks.filter(item=>!item.done)
-  const total = subTasks.length
-  
+  // updates state of a task
   const handleComplete = () => {
     if(undone.length === 0) {
       axios.put(`api/v1/tasks/${props.data.id}`, {done:true})
@@ -70,16 +68,15 @@ export default function TaskCard (props) {
       .catch(resp => console.log(resp))
     },[])
 
-
     return(
       <Card>
         <Link to={`/tasks/${props.data.id}`}>
           <h1>{props.data.title}</h1>
         </Link>
         <Words>
-        <p>Due:{props.data.due}</p>
-        <p>{undone.length}/{total} <br/></p>
-        <button onClick={handleComplete} className="checkbox">Complete</button>
+          <p>Due:{props.data.due}</p>
+          <p>{total - undone.length}/{total} <br/></p>
+          <button disabled={props.data.done} onClick={handleComplete} className="checkbox">Complete</button>
         </Words>
       </Card>
   )

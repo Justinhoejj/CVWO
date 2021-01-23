@@ -30,8 +30,7 @@ const Main = styled.div`
 
 export default function ShowTask(props) {
     const [task, setTask] = useState({})
-    const [tags, setTags] = useState([])
-    const [loaded, setLoaded] = useState(false)//to prevent preemptive return data calls
+    const [loaded, setLoaded] = useState(false) //to prevent preemptive return data calls
     const [newTask, setNewTask] = useState({})
     const [tagsIndex, setTagsIndex] = useState([])
 
@@ -76,7 +75,6 @@ export default function ShowTask(props) {
         <>
         <Column>
             <Main>
-                
                 <Card
                     attributes = {task.data}
                     relations = {task.relations}

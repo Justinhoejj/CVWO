@@ -44,6 +44,7 @@ const Wrapper = styled.div`
 export default function TagField(props){
     const [tagName, setTagname] =useState({})
 
+    // create a button for each tag
     const allTags = props.tagsIndex.map(
         item => { return(
             <HandleTag
@@ -60,7 +61,8 @@ export default function TagField(props){
         setTagname((Object.assign({}, tagName, {[e.target.name]: e.target.value})))
         console.log(tagName)
     }
-
+    
+    // creates a new tag
     const handleCreate = (e)=>{
         e.preventDefault()
         axios.post(`/api/v1/tags`, tagName)
@@ -73,15 +75,15 @@ export default function TagField(props){
     
     return(
         <Wrapper>
-        <h1>ADD TAGS</h1>
-        <p>Pick from existing tags or
-        <input onChange={handleChange} name="name" type="text" placeholder="Create Tag"/>
-        <button onClick={handleCreate}> + </button>
-        to track your tasks
-        </p>
-        <ul>
-            {allTags}
-        </ul>
+            <h1>ADD TAGS</h1>
+            <p>Pick from existing tags or
+            <input onChange={handleChange} name="name" type="text" placeholder="Create Tag"/>
+            <button onClick={handleCreate}> + </button>
+            to track your tasks
+            </p>
+            <ul>
+                {allTags}
+            </ul>
         </Wrapper>
     )
 }

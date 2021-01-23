@@ -34,18 +34,20 @@ const Card = styled.div`
     display: grid;
     
 `
+// first view
 export default function AllTasks() {
     const [tasks, setTasks] = useState([])
     const [complete, setComplete] = useState(false)
     const [loaded, setLoaded] =useState(true)
     
+    // seperate undone from done tasks when using filter
     const handleComplete = () => {
         setComplete(!complete)
     }
 
     useEffect(()=>{
-        //get all tasks from api
-        //update tasks in state
+        // get all tasks from api
+        // update tasks in state
         axios.get('api/v1/tasks.json')
         .then( resp => {
             setTasks(resp.data.data)
@@ -55,9 +57,9 @@ export default function AllTasks() {
 
     }, [loaded])
 
-    
-    const undone = tasks.filter(item=> item.done === complete) //fillters all undone tasks
-
+    // extracts all undone/done tasks depending on the state of complete
+    const undone = tasks.filter(item=> item.done === complete) 
+    // creates task card for each task
     const list = undone.map( item=>{
         return(
         <TaskCard 
@@ -71,14 +73,14 @@ export default function AllTasks() {
     return (
     <Home>
         <Header>
-            <h1>You have {undone.length} {(()=>{return complete?"tasks due for completion":"recently completed tasks"})()}</h1>
+            <h1>You have {undone.length} {(()=>{return !complete?"tasks due for completion":"recently completed tasks"})()}</h1>
             <button onClick={handleComplete}>{(()=>{return !complete?"Review Completed":"View Incomplete"})()}</button>
         </Header>
         <NewTask
             setLoaded={setLoaded}
         />
         <Card>
-        <ul>{list}</ul>
+            <ul>{list}</ul>
         </Card>
         <ClearHistory
             complete={complete}

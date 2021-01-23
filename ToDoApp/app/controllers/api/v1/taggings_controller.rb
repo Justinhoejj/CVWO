@@ -9,7 +9,7 @@ module Api
                 render json: {status: 'SUCCESS', message:'Loaded tagging', data:tagging, tag:tag},status: :ok
             end
 
-            def create #good
+            def create
                 tagging = Tagging.new(tagging_params)
 
                 if tagging.save
@@ -20,7 +20,7 @@ module Api
                 end
             end
 
-            def destroy #good
+            def destroy
                 tagging = Tagging.find(params[:id])
                 tagging.destroy
                 render json: {status: 'SUCCESS', message:'Deleted task', data:tagging},status: :ok 

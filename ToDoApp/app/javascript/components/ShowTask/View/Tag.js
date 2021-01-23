@@ -28,6 +28,7 @@ export default function Tag(props){
     const tagname = props.data[1]
     const taggingid = props.data[0]
     
+    // removes association between tag and task
     const handleUntag = (e)=>{
         axios.delete(`/api/v1/taggings/${taggingid}`)
         .then(resp=>{

@@ -30,7 +30,7 @@ export default function Card(props) {
     const {title, body, done, due, id} = props.attributes
     const taggingids = props.taggings.map(item=>{return item.id})
     const tagnames = props.relations.map(item=>{return item.name})
-    
+    // matches tagging association with tag name
     const zipped = taggingids.map(function(e, i){
         return[e, tagnames[i]]
     })
@@ -42,15 +42,15 @@ export default function Card(props) {
         />)
     })
     
-
     const subtasks = props.subtasks.map( item => {
-        return (<SubtaskCard 
-            key = {item.id}
-            attributes={item}
-            taskid={id}
+        return (
+            <SubtaskCard 
+                key = {item.id}
+                attributes={item}
+                taskid={id}
             />
-            )
-        })
+        )
+    })
 
     const handleDelete = () => {
         const url =`/api/v1/tasks/${id}`
@@ -63,12 +63,13 @@ export default function Card(props) {
     <Wrapper>
         <h1>{title}</h1>
         <p>{body}</p>
-        <p>{due}</p>
+        <p>Deadline: {due}</p>
         <TagArea>
-        {tag}
+            {tag}
         </TagArea>
         <p>To dos:</p>
         {subtasks}
+        <br/>
         <Link to={``}>
         <DeleteButton onClick={handleDelete}>Delete Task</DeleteButton>
         </Link>

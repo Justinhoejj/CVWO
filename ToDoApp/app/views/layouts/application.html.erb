@@ -4,10 +4,11 @@
     <title>Todo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+    <%# styling for header %>
     <style>
         body{
           background-color: lightblue;
+          font-size:30px;
         }
 
         .header{
@@ -39,6 +40,7 @@
   <div class ="header">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+  <%# render appropriate header based on whether user signed in or out %>
   <%if user_signed_in? %>
     <%= link_to "All tasks", root_path, method: :get%> &nbsp;&nbsp;&nbsp;
     <%= link_to "Search by tags", "/tags" %>
@@ -48,6 +50,7 @@
   <% else %>
   <% end %>
   </header>
+  <%# where the react part of the app renders via pages/index %>
     <%= yield %>
   </body>
 </html>

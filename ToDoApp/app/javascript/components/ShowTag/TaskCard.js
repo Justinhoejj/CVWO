@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const Card = styled.div`
-    border: 1px solid black;
+//identical to taskcard in all task. Seperated because receive different props
+export default function TaskCard (props) {
+  const Card = styled.div`
+    border: 2px solid;
     margin-bottom: 1px;
     background-color: lightgrey;
     color:black;
@@ -19,8 +21,8 @@ const Card = styled.div`
     }
 
     button{
-      background: lightblue;
-      margin-top: 20px;
+      background: ${props.data.done ? "grey": "lightblue"};
+      margin-top: 30px;
       margin-right: 50px;
       border-radius: 3px;
       font-size:15px;
@@ -42,12 +44,8 @@ const Words = styled.div`
     }
 
 `
-const currentDate = new Date();
-
-export default function TaskCard (props) {
-    
   const [subTasks, setSubTasks] = useState([]);
-  const undone = subTasks.filter(item=>item.done)
+  const undone = subTasks.filter(item=>!item.done)
   const total = subTasks.length
   
   const handleComplete = () => {
@@ -75,9 +73,9 @@ export default function TaskCard (props) {
             <h1>{props.data.title}</h1>
           </Link>
           <Words>
-          <p>Due:{props.data.due}</p>
-          <p>{undone.length}/{total} <br/></p>
-          <button onClick={handleComplete} className="checkbox">Complete</button>
+            <p>Due:{props.data.due}</p>
+            <p>{total - undone.length}/{total} <br/></p>
+            <button disabled={props.data.done} onClick={handleComplete}>Complete</button>
           </Words>
         </Card>
     )

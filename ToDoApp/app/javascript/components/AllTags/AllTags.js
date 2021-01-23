@@ -21,7 +21,7 @@ const Wrapper = styled.div`
             border:1px solid black;
             &:hover{
                 border: 3px solid black;
-                font-size: 16px;
+                font-size: 20px;
                 color:black;
             }
          }
@@ -29,14 +29,17 @@ const Wrapper = styled.div`
 
 export default function AllTags() {
     const [tags, setTags]=useState([])
-    
+
     useEffect(()=>{
         axios.get(`/api/v1/tags.json`)
         .then(resp=>setTags(resp.data.data))
         .catch(resp=>console.log(resp))
     },[])
-    
+
+    //sorts tags alphabetically
     const ordered = tags.sort((a,b)=> a.name.localeCompare(b.name))
+    
+    //wraps task into a component that links to associated tasks
     const tagcards = ordered.map(
         item =>{
             return( 
@@ -45,9 +48,6 @@ export default function AllTags() {
                 </Link>
             )
         })
-
-
-
     return (
         <Wrapper>
             {tagcards}

@@ -11,13 +11,13 @@ const Button = styled.button`
     }
 `
 
-
 export default function HandleTag(props) {
+    // pick up data for association
     const taggingData = {
         "task_id":props.task.data.id,
         "tag_id":props.tag.id
     }
-
+    // creates association
     const handleTagging = () => {
         axios.post(`/api/v1/taggings`, taggingData)
         .then(resp=>{

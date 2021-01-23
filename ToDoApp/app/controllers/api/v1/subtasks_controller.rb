@@ -14,14 +14,14 @@ module Api
                 end
             end
 
-            def destroy #good
+            def destroy
                 subtask = Subtask.find(params[:id])
                 subtask.destroy
                 render json: {status: 'SUCCESS', message:'Deleted subtask', data:subtask},status: :ok 
 
             end
 
-            def update #good
+            def update
                 subtask = Subtask.find(params[:id])
                 if subtask.update_attributes(subtask_params)
                     render json: {status: 'SUCCESS', message:'Updated subtask', data:subtask},status: :ok 

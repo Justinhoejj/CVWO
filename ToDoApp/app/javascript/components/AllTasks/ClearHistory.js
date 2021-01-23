@@ -24,11 +24,11 @@ const Wrapper = styled.div`
 `
 
 export default function ClearHistory(props)  {
-    const {tasks, complete, setloaded} = props
-
+    const {tasks, complete, setLoaded} = props
     const completed = tasks.filter(item => item.done)
     const completedid = completed.map(item =>{return item.id})
     var i = 0;
+    // delete tasks one at a time
     const handleClearHistory = () => {
         if(i < completed.length){    
             axios.delete(`api/v1/tasks/${completedid[i]}`)
@@ -36,11 +36,11 @@ export default function ClearHistory(props)  {
             .catch(resp => console.log(resp))
             i = i + 1
         } else{
-            setloaded(false)
+            setLoaded(false)
         }
     }
-
-    if(props.complete) {
+    // renders only when user is looking at done tasks
+    if(complete) {
         return ( 
         <Wrapper>
         <button onClick={handleClearHistory}>Clear History</button>

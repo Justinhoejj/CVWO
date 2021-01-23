@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Task from './Task'
+import TaskCard from './TaskCard'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-
-    
+   margin-right: 40px; 
     button{       
         margin-top: 30px;
         padding: 5px 5px 5px 5px;
@@ -39,6 +38,7 @@ export default function ShowTag(props){
     const id = props.match.params.id
     const [tagname, setTagname]= useState()
 
+    // retrieves all tasks related to current tag
     useEffect(()=>{
         axios.get(`/api/v1/tags/${id}`)
         .then(resp=>{
@@ -50,13 +50,13 @@ export default function ShowTag(props){
     
     const list = tasks.map( item =>{
         return(
-        <Task 
+        <TaskCard 
             key={item.id}
             data={item}
             />
         )
     })
-
+    // deletes the tag and all its associations
     const handleDelete = ()=>{
         axios.delete(`/api/v1/tags/${id}`)
         .then(resp => console.log(resp))
@@ -66,13 +66,13 @@ export default function ShowTag(props){
 
     return (
         <Wrapper>
-        <h1>You have {tasks.length} tasks under {tagname} </h1>
-        <Link to={``}>
-            <button onClick={handleDelete}>Remove </button> {tagname} tag from all tasks
-        </Link>
-        <ul>
-            {list}
-        </ul>
+                <h1>You have {tasks.length} tasks under {tagname} </h1>
+            <Link to={``}>
+                <button onClick={handleDelete}>Remove </button> {tagname} tag from all tasks
+            </Link>
+                <ul>
+                    {list}
+                </ul>
         </Wrapper>
     )
 }
