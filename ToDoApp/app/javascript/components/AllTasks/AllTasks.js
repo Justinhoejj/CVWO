@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import TaskCard from './TaskCard'
 import NewTask from './NewTask'
+import ClearHistory from './ClearHistory'
 import styled from 'styled-components'
 
 const Home = styled.div `
@@ -54,10 +55,10 @@ export default function AllTasks() {
 
     }, [loaded])
 
+    
+    const undone = tasks.filter(item=> item.done === complete) //fillters all undone tasks
 
-    const filtered = tasks.filter(item=> item.done === complete) //fillters all undone tasks
-
-    const list = filtered.map( item=>{
+    const list = undone.map( item=>{
         return(
         <TaskCard 
             key={item.id}
@@ -70,7 +71,7 @@ export default function AllTasks() {
     return (
     <Home>
         <Header>
-            <h1>You have {filtered.length} {(()=>{return complete?"tasks due for completion":"recently completed tasks"})()}</h1>
+            <h1>You have {undone.length} {(()=>{return complete?"tasks due for completion":"recently completed tasks"})()}</h1>
             <button onClick={handleComplete}>{(()=>{return !complete?"Review Completed":"View Incomplete"})()}</button>
         </Header>
         <NewTask
@@ -79,6 +80,11 @@ export default function AllTasks() {
         <Card>
         <ul>{list}</ul>
         </Card>
+        <ClearHistory
+            complete={complete}
+            tasks={tasks}
+            setLoaded={setLoaded}
+        />
     </Home>    
         )
 }

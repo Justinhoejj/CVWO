@@ -11,15 +11,11 @@ input {
     font-color: black;
     background-color: #AAE5F7;
     border: 3px solid #609BC9;
+    width: 400px;
 
     &:hover{
         border: 5px solid #609BC9; 
     }
-
-    &:last-child{
-        width:40px;
-    }
-    
     }
 
 button {
@@ -39,7 +35,15 @@ button {
 const Form = styled.form`
     display: inline-box;
 `
+const LastRow = styled.div`
+    text-align: left;
+    margin-left: 10px;
+    input{
+            width: 200px;
+            margin-right: 20px;
+        }
 
+`
 
 
 export default function NewTask(props) {
@@ -66,9 +70,10 @@ export default function NewTask(props) {
             <Form onSubmit={handleSubmit}>
                     <input onChange={handleChange} type="text" name="title"  placeholder="Task Title"/>
                     <br/>
+                    <LastRow>
                     <input onChange={handleChange} type="date" name="due" placeholder="yyyy-mm-dd"/>
-                    <br/>
                     <button type="submit">Add</button>
+                    </LastRow>
             </Form>
         </Wrapper>
     )
