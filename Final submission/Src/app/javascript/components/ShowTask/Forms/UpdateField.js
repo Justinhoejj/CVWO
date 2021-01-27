@@ -44,11 +44,11 @@ const TaskDetails = styled.textarea`
 `
 const LastRow = styled.div`
 
-    display: flex;    
+    display: flex;
+    justify-content: center;    
     input {
-        margin-left: 0px;
         width:300px;
-        margin-right: 40px;
+        margin-right: 6%;
     }
 
     button {

@@ -11,7 +11,7 @@ export default function TaskCard (props) {
   
   const Card = styled.div`
     border: 2px solid ${undone == 0 ? "darkgreen" : "red"};
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     background-color: lightgrey;
     margin-right: 30px;
     color:black;
