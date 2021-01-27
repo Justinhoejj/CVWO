@@ -10,9 +10,17 @@ const Home = styled.div `
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    select{
+        border:2px solid black;
+        font-size:16px;
+        background-color: #AAE5F7;
+        &:hover{
+            border:3px solid black;
+        }
+    }
 `
 const Header = styled.div `
-    padding: 50px 100px 10px 100px;
+    padding: 10px 100px 10px 100px;
     display: inline-box;
     h1 {
         font-size: 42px;
@@ -28,13 +36,9 @@ const Sort = styled.div`
         padding: 2px;
         border-radius: 5px;
         border: 2px solid black;
-        background-color: lightblue;
+        background-color: #AAE5F7;
     &:hover {
         font-weight: bold;
-    }
-    .select-css {
-        font-size: 20px;
-        border: 2px solid black;
     }
 `
 const Card = styled.div`
@@ -46,7 +50,6 @@ export default function AllTasks() {
     const [complete, setComplete] = useState(false)
     const [loaded, setLoaded] =useState(true)
     const [torender, setTorender]=useState([])
-    
 
     useEffect(()=>{
         // get all tasks from api
@@ -62,13 +65,12 @@ export default function AllTasks() {
     }, [loaded])
 
     // seperate undone from done tasks when using filter
-    const handleComplete = () => {
-        setComplete(!complete)
-    }
+    const handleComplete = () => { setComplete(!complete)}
     
     // extracts all undone/done tasks depending on the state of complete
-    // determines order in which array is returned
     const undone = tasks.filter(item => item.done === complete)
+
+    // sets the order in which array is returned determined by user
     const handleSort = (e) => {
         if(e.target.value === "soon") {
             setTorender(undone.sort((a, b) => a.due.localeCompare(b.due)))
@@ -110,14 +112,13 @@ export default function AllTasks() {
         <Sort>
         View <button onClick={()=>{handleComplete();handleSort();}}>{(()=>{return !complete?"Incomplete":"Completed"})()}</button> tasks by:
             <select onChange={handleSort}>
-                <option></option>
+                <option>-select-</option>
                 <option value="soon">Due Soon</option>
                 <option value="created">Recently created</option>
                 <option value="oldest">Oldest</option>
                 <option value="lowest">Least priority</option>
                 <option value="a">Title A - Z</option>
                 <option value="z">Title Z - A</option>
-                {/* <option value="completed">Completed</option> */}
             </select>
         </Sort>
         <Card>

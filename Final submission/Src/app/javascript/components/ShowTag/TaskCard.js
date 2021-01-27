@@ -17,7 +17,14 @@ export default function TaskCard (props) {
 
     a {
       color:black;
+      background-color: lightgrey;
       text-decoration: none;
+      border: 0px;
+      margin-top: 0px;
+      &:hover{
+        border:0px;
+        color:black;
+      }
     }
 
     button{

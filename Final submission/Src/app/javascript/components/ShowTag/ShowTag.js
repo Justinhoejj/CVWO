@@ -6,31 +6,34 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
    margin-right: 40px; 
-    button{       
+   a{   
+        padding-left: 5px;
+        margin-left:40px;    
         margin-top: 30px;
-        padding: 5px 5px 5px 5px;
+        margin-right:10px;
         font-size: 16px;
         background-color: lightblue;
         border: 1px solid red;
         color:red;
+        text-decoration:none;
+        font-size: 20px;
 
         &:hover{
             border: 3px solid red;
             color: red;
         }
     }
+
+    select{
+        border:2px solid black;
+        font-size:20px;
+        background-color: #AAE5F7;
+    }
     
-    h1 {
+    h1{
         margin-left: 40px;
     }
 
-    a {
-        margin-left: 40px; 
-        text-decoration:none;
-        color: black;
-        font-size: 20px;
-        
-    }
     p{
         margin-left: 40px;
     }
@@ -51,8 +54,11 @@ export default function ShowTag(props){
         })
         .catch(resp=>console.log(resp))
     },[])
-    
+
+    // extracts all undone tasks 
     const undone = tasks.filter(item => !item.done)
+
+    // sorts tasks in order based on users selection
     const handleSort = (e) => {
         if(e.target.value === "soon") {
             setTorender(undone.sort((a, b) => a.due.localeCompare(b.due)))
@@ -89,7 +95,7 @@ export default function ShowTag(props){
                 <h1>You have {undone.length} tasks under {tagname}</h1>
                 <p>View by:
                 <select onChange={handleSort}>
-                    <option>--</option>
+                    <option>-select-</option>
                     <option value="soon">Due Soon</option>
                     <option value="created">Recently created</option>
                     <option value="oldest">Oldest</option>
@@ -98,9 +104,9 @@ export default function ShowTag(props){
                     <option value="z">Title Z - A</option>
                 </select>
                 </p>
-            <Link to={``}>
-                <button onClick={handleDelete}>Remove </button> {tagname} tag from all tasks
-            </Link>
+            
+             <Link to={``} onClick={handleDelete}>Remove </Link> {tagname} tag from all tasks
+            
                 <ul>
                     {list}
                 </ul>

@@ -10,7 +10,7 @@ export default function TaskCard (props) {
   const total = subTasks.length
   
   const Card = styled.div`
-    border: 2px solid ${undone == 0 ? "darkgreen" : "red"};
+    border: 2px solid ${undone.length === 0 ? "darkgreen" : "red"};
     margin-bottom: 2px;
     background-color: lightgrey;
     margin-right: 30px;
@@ -26,7 +26,7 @@ export default function TaskCard (props) {
     }
 
     button{
-      background: ${props.data.done? "grey" : "lightblue" };
+      background: ${props.data.done? "grey" : undone.length !== 0? "lightgrey": "lightblue" };
       margin-top: 30px;
       margin-right: 50px;
       border-radius: 3px;
@@ -76,7 +76,7 @@ const Words = styled.div`
         <Words>
           <p>Due:{props.data.due}</p>
           <p>{total - undone.length}/{total} <br/></p>
-          <button disabled={props.data.done} onClick={handleComplete} className="checkbox">Complete</button>
+          <button disabled={props.data.done} onClick={handleComplete} className="checkbox">{undone.length===0?"Complete" : "incomplete"}</button>
         </Words>
       </Card>
   )
